@@ -30,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour
 	{
 		interactionPressed = Input.GetAxisRaw("Submit") == 1 ? true : false;
 
-		if(interactionPressed)
+		if(interactionPressed && interactable != null)
 		{
 			textBoxObject.SetActive(true);
 			interactable.Interact(gameObject);
@@ -52,5 +52,6 @@ public class PlayerInteraction : MonoBehaviour
 	{
 		textBoxObject.SetActive(false);
 		interactable.TogglePrompt(false);
+		interactable = null;
 	}
 }
