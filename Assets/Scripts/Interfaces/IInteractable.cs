@@ -8,4 +8,6 @@ using UnityEngine;
 public interface IInteractable
 {
 	void Interact(GameObject Interactor);
+
+	void TogglePrompt(bool toggle);
 }
