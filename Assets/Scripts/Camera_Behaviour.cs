@@ -20,17 +20,20 @@ public class Camera_Behaviour : MonoBehaviour
 		player = FindObjectOfType<Player_Behaviour>();
 	}
 
-	private void FixedUpdate() //Calculate the camera position after the actual player position is calculated to prevent hitching
+	private void Update()
 	{
-		Vector3 desiredPos = new Vector3(target.transform.position.x + offset.x + (player.MovementInput.x * frontOffset), offset.y, offset.z); //Calculates the desired position of the camera relative to the movement of the player
-		smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothing * Time.deltaTime); //Does the camera moving stuff
-
 		if(clamp) //is clamped? yes? then clamp
 		{
 			Vector3 pos = transform.position;
 			pos.x = Mathf.Clamp(transform.position.x, clampX.x, clampX.y);
 			transform.position = pos;
 		}
+	}
+
+	private void FixedUpdate() //Calculate the camera position after the actual player position is calculated to prevent hitching
+	{
+		Vector3 desiredPos = new Vector3(target.transform.position.x + offset.x + (player.MovementInput.x * frontOffset), offset.y, offset.z); //Calculates the desired position of the camera relative to the movement of the player
+		smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothing * Time.deltaTime); //Does the camera moving stuff
 
 		transform.position = smoothedPos;
 	}
